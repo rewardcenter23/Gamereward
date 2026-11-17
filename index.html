@@ -1,0 +1,635 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101116">
+
+<title>Gaming Rewards Center</title>
+<meta name="description" content="Explore gaming reward packages and enjoy an interactive experience for Roblox fans.">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+ background:#0c0d11;
+ color:white;
+ font-family:Arial,sans-serif;
+ min-height:100vh;
+}
+
+header{
+ height:75px;
+ border-bottom:1px solid #292929;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 20px;
+}
+
+.logo{
+ color:#ffc342;
+ font-size:21px;
+ font-weight:900;
+}
+
+.nav{color:#aaa;font-size:11px}
+
+main{
+ width:100%;
+ max-width:520px;
+ margin:35px auto;
+ padding:18px;
+}
+
+.hero{text-align:center;margin-bottom:30px}
+.hero h1{font-size:32px;margin-bottom:12px}
+.gold{color:#ffc342}
+
+.hero p{
+ color:#999;
+ line-height:1.6;
+ font-size:14px;
+}
+
+.card{
+ background:#17181e;
+ border:1px solid #303039;
+ border-radius:16px;
+ padding:23px;
+ margin-bottom:18px;
+}
+
+.section-title{
+ font-size:19px;
+ margin-bottom:17px;
+}
+
+.youtube{
+ background:#ed3030;
+ display:block;
+ color:white;
+ text-align:center;
+ text-decoration:none;
+ padding:17px;
+ border-radius:9px;
+ font-weight:bold;
+ margin:20px 0;
+}
+
+.note{
+ font-size:11px;
+ color:#888;
+ text-align:center;
+ line-height:1.7;
+}
+
+button{
+ cursor:pointer;
+ border:0;
+ font-weight:bold;
+}
+
+.primary{
+ width:100%;
+ background:linear-gradient(120deg,#ffdc83,#e9a921);
+ color:#151515;
+ padding:17px;
+ border-radius:9px;
+ font-size:15px;
+ margin-top:12px;
+}
+
+.primary:disabled{
+ opacity:.4;
+ cursor:not-allowed;
+}
+
+.packages{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+}
+
+.package{
+ background:#202129;
+ border:1px solid #41414b;
+ border-radius:12px;
+ color:white;
+ padding:23px 8px;
+ font-size:20px;
+}
+
+.package small{
+ display:block;
+ color:#ffc342;
+ font-size:11px;
+ margin-top:8px;
+}
+
+.package.selected{
+ border:2px solid #ffc342;
+ background:#30291a;
+}
+
+input{
+ width:100%;
+ padding:16px;
+ border:1px solid #41414b;
+ border-radius:9px;
+ background:#101116;
+ color:white;
+ margin:10px 0;
+ font-size:16px;
+}
+
+.hidden{display:none!important}
+.center{text-align:center}
+
+.progress-track{
+ height:13px;
+ background:#333;
+ border-radius:20px;
+ overflow:hidden;
+ margin:25px 0;
+}
+
+.progress-fill{
+ height:100%;
+ width:0%;
+ background:linear-gradient(90deg,#e6a21e,#ffe19a);
+ transition:width .4s;
+}
+
+.status{
+ color:#ffc342;
+ margin-top:15px;
+ font-size:14px;
+}
+
+.big{
+ font-size:35px;
+ font-weight:900;
+ color:#ffc342;
+}
+
+.report{
+ background:#e94444;
+ color:white;
+ padding:17px;
+ border-radius:9px;
+ width:100%;
+ margin-top:20px;
+}
+
+footer{
+ text-align:center;
+ padding:30px 15px;
+ color:#777;
+ font-size:11px;
+ line-height:2;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">◆ REWARD CENTER</div>
+ <div class="nav">GAMING EXPERIENCE</div>
+</header>
+
+<!-- SUBSCRIBE SCREEN -->
+
+<main id="subscribe">
+
+ <section class="hero">
+  <h1>Welcome to <span class="gold">Rewards</span></h1>
+  <p>Discover an exciting gaming experience.</p>
+ </section>
+
+ <div class="card center">
+
+  <div style="font-size:48px">▶️</div>
+
+  <h2 class="section-title">
+   Subscribe to Unlock!
+  </h2>
+
+  <p class="note">
+   Join our YouTube community and support our creator.
+  </p>
+
+  <a class="youtube"
+     href="https://youtube.com/@becomingfamousfrom1video"
+     target="_blank"
+     rel="noopener noreferrer"
+     onclick="unlockContinue()">
+
+     🔴 SUBSCRIBE NOW
+
+  </a>
+
+  <p id="subscribeStatus" class="status">
+   🔒 Continue is locked
+  </p>
+
+  <button class="primary"
+          id="continueButton"
+          disabled
+          onclick="show('home')">
+
+    🔒 CONTINUE →
+
+  </button>
+
+  <p class="note" style="margin-top:15px">
+   Click Subscribe Now to unlock the experience.
+   A click does not verify an actual subscription.
+  </p>
+
+ </div>
+</main>
+
+<!-- GENERATOR SCREEN -->
+
+<main id="home" class="hidden">
+
+ <section class="hero">
+  <h1>Gaming <span class="gold">Rewards</span></h1>
+  <p>Select a package and explore the interactive reward simulator.</p>
+ </section>
+
+ <div class="card">
+  <h3 class="section-title">Select Your Package</h3>
+
+  <div class="packages">
+
+   <button class="package" data-amount="400">
+    400<small>ROBUX</small>
+   </button>
+
+   <button class="package" data-amount="800">
+    800<small>ROBUX</small>
+   </button>
+
+   <button class="package" data-amount="1700">
+    1,700<small>ROBUX</small>
+   </button>
+
+   <button class="package" data-amount="10000">
+    10,000<small>ROBUX</small>
+   </button>
+
+  </div>
+ </div>
+
+ <div class="card">
+
+  <h3 class="section-title">Player Information</h3>
+
+  <input
+   id="username"
+   maxlength="20"
+   placeholder="Enter Roblox username"
+  >
+
+  <button class="primary" onclick="startGeneration()">
+   SUBMIT & CONTINUE →
+  </button>
+
+  <p class="note" style="margin-top:15px">
+   Interactive simulator only. No real Robux are transferred.
+   Never enter your password.
+  </p>
+
+ </div>
+
+</main>
+
+<!-- LOADING SCREEN -->
+
+<main id="loading" class="hidden">
+
+ <div class="card center">
+
+  <h2>Processing Experience</h2>
+
+  <p class="status" id="status">
+   Initializing...
+  </p>
+
+  <div class="progress-track">
+   <div class="progress-fill" id="progress"></div>
+  </div>
+
+  <div class="big" id="percent">0%</div>
+
+  <p class="note" style="margin-top:20px">
+   Please wait while the simulation runs.
+  </p>
+
+ </div>
+
+</main>
+
+<!-- RESULT SCREEN -->
+
+<main id="result" class="hidden">
+
+ <div class="card center">
+
+  <div style="font-size:55px">🎉</div>
+
+  <h1>CONGRATULATIONS!</h1>
+
+  <p id="playerName" class="status"></p>
+
+  <div class="big" style="margin:25px 0">
+   GOTCHA! 😂
+  </div>
+
+  <h2>YOU JUST UNLOCKED...</h2>
+
+  <h2 class="gold" style="margin-top:15px">
+   NOTHING! 🤣
+  </h2>
+
+  <p style="color:#aaa;margin-top:20px">
+   You've successfully completed our prank experience!
+  </p>
+
+  <button class="report" onclick="startReport()">
+   🚨 REPORT THIS WEBSITE
+  </button>
+
+ </div>
+
+</main>
+
+<!-- REPORT SCREEN -->
+
+<main id="reported" class="hidden">
+
+ <div class="card center">
+
+  <div style="font-size:55px">📩</div>
+
+  <h1>REPORT RECEIVED!</h1>
+
+  <div class="progress-track">
+   <div class="progress-fill" id="reportProgress"></div>
+  </div>
+
+  <h2 id="reportMessage" class="gold">
+   Processing...
+  </h2>
+
+  <p class="note" style="margin-top:20px">
+   This is a simulated report, not an actual submission.
+  </p>
+
+ </div>
+
+</main>
+
+<footer>
+ REWARD CENTER © 2026<br>
+ Interactive gaming experience<br>
+ Not affiliated with Roblox.
+</footer>
+
+<script>
+
+// SCREEN NAVIGATION
+
+function show(id){
+
+ const screens=[
+  "subscribe",
+  "home",
+  "loading",
+  "result",
+  "reported"
+ ];
+
+ screens.forEach(screen=>{
+  document.getElementById(screen)
+  .classList.add("hidden");
+ });
+
+ document.getElementById(id)
+ .classList.remove("hidden");
+
+ window.scrollTo(0,0);
+}
+
+// SUBSCRIBE UNLOCK - SAVED IN BROWSER
+
+function unlockContinue(){
+
+ try{
+  localStorage.setItem("subscribeClicked","yes");
+ }catch(e){}
+
+ updateSubscribeButton();
+
+}
+
+function updateSubscribeButton(){
+
+ let unlocked=false;
+
+ try{
+  unlocked=localStorage.getItem("subscribeClicked")==="yes";
+ }catch(e){}
+
+ const button=
+ document.getElementById("continueButton");
+
+ const status=
+ document.getElementById("subscribeStatus");
+
+ if(unlocked){
+
+  button.disabled=false;
+  button.textContent="CONTINUE →";
+  button.style.opacity="1";
+  button.style.cursor="pointer";
+
+  status.textContent="✓ Continue unlocked!";
+
+ }else{
+
+  button.disabled=true;
+  button.textContent="🔒 CONTINUE →";
+  button.style.opacity=".4";
+
+  status.textContent="🔒 Continue is locked";
+
+ }
+
+}
+
+// UPDATE WHEN RETURNING FROM YOUTUBE
+
+window.addEventListener("pageshow",updateSubscribeButton);
+
+document.addEventListener(
+ "visibilitychange",
+ ()=>{
+  if(!document.hidden){
+   updateSubscribeButton();
+  }
+ }
+);
+
+// PACKAGE SELECTION
+
+let selected=null;
+
+document.querySelectorAll(".package")
+.forEach(button=>{
+
+ button.onclick=()=>{
+
+  document.querySelectorAll(".package")
+  .forEach(item=>item.classList.remove("selected"));
+
+  button.classList.add("selected");
+
+  selected=button.dataset.amount;
+
+ };
+
+});
+
+// GENERATION PROCESS
+
+let timer=null;
+
+function startGeneration(){
+
+ const username=
+ document.getElementById("username").value.trim();
+
+ if(!selected){
+  alert("Please select a package!");
+  return;
+ }
+
+ if(!/^[a-zA-Z0-9_]{3,20}$/.test(username)){
+  alert("Please enter a valid username.");
+  return;
+ }
+
+ document.getElementById("playerName")
+ .textContent="Player: "+username;
+
+ show("loading");
+
+ const messages=[
+  "Initializing experience...",
+  "Checking player details...",
+  "Preparing simulation...",
+  "Processing reward package...",
+  "Almost there...",
+  "Finishing simulation..."
+ ];
+
+ let progress=0;
+ let step=0;
+
+ clearInterval(timer);
+
+ timer=setInterval(()=>{
+
+  progress++;
+
+  document.getElementById("progress")
+  .style.width=progress+"%";
+
+  document.getElementById("percent")
+  .textContent=progress+"%";
+
+  if(progress%10===0 && step<messages.length){
+
+   document.getElementById("status")
+   .textContent=messages[step++];
+
+  }
+
+  if(progress>=100){
+
+   clearInterval(timer);
+
+   setTimeout(()=>{
+    show("result");
+   },500);
+
+  }
+
+ },500);
+
+}
+
+// REPORT PRANK
+
+function startReport(){
+
+ show("reported");
+
+ let progress=0;
+
+ const bar=
+ document.getElementById("reportProgress");
+
+ const message=
+ document.getElementById("reportMessage");
+
+ const reportTimer=setInterval(()=>{
+
+  progress+=10;
+
+  bar.style.width=progress+"%";
+
+  if(progress===30){
+   message.textContent="Reviewing request...";
+  }
+
+  if(progress===60){
+   message.textContent="Checking prank status...";
+  }
+
+  if(progress===90){
+   message.textContent="Almost finished...";
+  }
+
+  if(progress>=100){
+
+   clearInterval(reportTimer);
+
+   message.textContent="PLOT TWIST! 😂";
+
+   setTimeout(()=>{
+
+    message.textContent=
+    "YOU JUST REPORTED THE PRANKSTER! 🤣";
+
+   },2000);
+
+  }
+
+ },400);
+
+}
+
+// INITIALIZE
+
+updateSubscribeButton();
+
+</script>
+
+</body>
+</html>
